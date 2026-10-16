@@ -1,20 +1,19 @@
 import requests
 import websocket
 import certifi
+from datetime import date, datetime, timedelta
 
-requests.post("https://ntfy.sh/stock_alerts", data="Test message")
+# requests.post("https://ntfy.sh/stock_alerts", data="Test message")
 
 # ALPHA VANTAGE
 
-# APIkey = ""
 # url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MU&apikey=...'
 # r = requests.get(url)
 # data = r.json()
-
-# print(data)
+# yesterday = date.today() - timedelta(days=1)
+# print(data.get("Time Series (Daily)").get(str(yesterday)).get("4. close"))
 
 # FINNHUB
-# apiKey = ""
 
 # def on_message(ws, message):
 #     print(message)
