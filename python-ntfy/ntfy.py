@@ -5,7 +5,7 @@ from datetime import date, datetime, timedelta
 
 # requests.post("https://ntfy.sh/stock_alerts", data="Test message")
 
-# ALPHA VANTAGE 
+# ALPHA VANTAGE
 
 # url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MU&apikey=...'
 # r = requests.get(url)

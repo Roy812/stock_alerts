@@ -8,6 +8,8 @@ on:
 jobs:
     run-stock-alert:
         runs-on: ubuntu-latest
+        env:
+          TZ: 'Amsterdam/Europe'
         steps:
             - name: Check out repository
               uses: actions/checkout@v4
