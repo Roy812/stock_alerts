@@ -3,7 +3,7 @@ import websocket
 import certifi
 from datetime import date, datetime, timedelta
 
-# requests.post("https://ntfy.sh/stock_alerts", data="Test message")
+requests.post("https://ntfy.sh/stock_alerts", data="Test message")
 
 # ALPHA VANTAGE
 
