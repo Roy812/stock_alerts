@@ -3,13 +3,11 @@ name: Stock Alert
 on: 
   workflow_dispatch:
   schedule:
-    - cron: '0 18 * * 1-6' # Monday to Saturday at 18pm UTC (20pm Amsterdam time)
+    - cron: '0 12,17 * * 1-6' # Monday to Saturday at 10am and 12pm UTC
 
 jobs:
     run-stock-alert:
         runs-on: ubuntu-latest
-        # env:
-        #   TZ: 'Amsterdam/Europe'
         steps:
             - name: Check out repository
               uses: actions/checkout@v4
