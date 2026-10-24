@@ -1,48 +1,38 @@
+import os
+from datetime import date, datetime, timedelta
+
+import certifi
+import finnhub
 import requests
 import websocket
-import certifi
-from datetime import date, datetime, timedelta
-from fetcher import fetcher
 
-# requests.post("https://ntfy.sh/stock_alerts", data="Test message")
+requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-# fetcher.add_stock("MU", "Micron Technology", 999.00)
-# fetcher.get_stock("MU")
+# ALPACA - HISTORICAL BARS
+# query_date = (datetime.now() - timedelta(days=1)).date().strftime("%Y-%m-%d")
+# query_date = datetime.now().date().strftime("%Y-%m-%d")
+
+# url = "https://data.alpaca.markets/v2/stocks/bars?symbols=MU&timeframe=30min&start=" + query_date + "T13%3A00%3A00Z&end=" + query_date + "T13%3A30%3A00Z&limit=1000&adjustment=raw&feed=sip&sort=asc"
+# headers = {
+#     "accept": "application/json",
+#     "APCA-API-KEY-ID": os.environ.get("ALPACA_API_KEY"),
+#     "APCA-API-SECRET-KEY": os.environ.get("ALPACA_SECRET_KEY")
+# }
+
+# response = requests.get(url, headers=headers)
+# stock_data = response.json().get("bars").get("MU")[0] # Get the first bar data for MU
+# current_price = stock_data.get("c")
+# print(current_price, "on", stock_data.get("t"))
+
+# FINNHUB - QUOTE
+# finnhub_client = finnhub.Client(api_key="...")
+# print(finnhub_client.quote("MU")["dp"])
+# if finnhub_client.quote("MU")["dp"] > 4.99:
+#     requests.post("https://ntfy.sh/stock_alerts", data="MU up over 4.99%: " + str(finnhub_client.quote("MU")["dp"]))
 
 # ALPHA VANTAGE
-
 # url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MU&apikey=...'
 # r = requests.get(url)
 # data = r.json()
 # yesterday = date.today() - timedelta(days=1)
 # print(data.get("Time Series (Daily)").get(str(yesterday)).get("4. close"))
-
-# FINNHUB
-
-# def on_message(ws, message):
-#     print(message)
-
-# def on_error(ws, error):
-#     print(error)
-
-# def on_close(ws, status_code, message):
-#     print("### closed ###")
-#     print("Status:", status_code)
-#     print("Message:", message)
-
-# def on_open(ws):
-#     ws.send('{"type":"subscribe","symbol":"MU"}')
-#     ws.send('{"type":"subscribe","symbol":"SNDK"}')
-    # ws.send('{"type":"subscribe","symbol":"BINANCE:BTCUSDT"}')
-    # ws.send('{"type":"subscribe","symbol":"IC MARKETS:1"}')
-
-# if __name__ == "__main__":
-#     websocket.enableTrace(True)
-#     ws = websocket.WebSocketApp("wss://ws.finnhub.io?token=...",
-#                               on_message = on_message,
-#                               on_error = on_error,
-#                               on_close = on_close)
-#     ws.on_open = on_open
-#     ws.run_forever(
-#         sslopt={"ca_certs": certifi.where()}
-#     )
