@@ -3,7 +3,7 @@ name: Stock Alert
 on: 
   workflow_dispatch:
   schedule:
-    - cron: '0 12,17 * * 1-6' # Monday to Saturday at 10am and 12pm UTC
+    - cron: '0 6 * * 1-5' # Monday tothrough Friday at 6:00 AM UTC
 
 jobs:
     run-stock-alert:
