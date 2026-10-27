@@ -3,7 +3,7 @@ name: Stock Alert
 on: 
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * 1-5' # Monday tothrough Friday at 6:00 AM UTC
+    - cron: '0 6 * * 1-5' # Monday through Friday at 6:00 AM UTC
 
 jobs:
     run-stock-alert:
@@ -24,4 +24,4 @@ jobs:
 
             - name: Run stock alert script
               run: |
-                python python-ntfy/ntfy.py
+                python ntfy/ntfy.py
