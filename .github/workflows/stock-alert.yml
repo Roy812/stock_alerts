@@ -23,5 +23,7 @@ jobs:
                 python -m pip install requests websocket-client finnhub-python certifi
 
             - name: Run stock alert script
+              env:
+                TEST_SECRET: ${{ secrets.TEST_SECRET }}
               run: |
                 python ntfy/ntfy.py
