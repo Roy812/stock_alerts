@@ -6,23 +6,27 @@ import finnhub
 import requests
 import websocket
 
-requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+# requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+if not (requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))):
+    requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: ?")
 
-# ALPACA - HISTORICAL BARS
+# ALPACA - HISTORICAL BARS (GMT)
 # query_date = (datetime.now() - timedelta(days=1)).date().strftime("%Y-%m-%d")
 # query_date = datetime.now().date().strftime("%Y-%m-%d")
 
-# url = "https://data.alpaca.markets/v2/stocks/bars?symbols=MU&timeframe=30min&start=" + query_date + "T13%3A00%3A00Z&end=" + query_date + "T13%3A30%3A00Z&limit=1000&adjustment=raw&feed=sip&sort=asc"
+# url = "https://data.alpaca.markets/v2/stocks/bars?symbols=AAPL&timeframe=30min&start=" + query_date + "T12%3A00%3A00Z&end=" + query_date + "T12%3A30%3A00Z&limit=1000&adjustment=raw&feed=sip&sort=asc"
 # headers = {
 #     "accept": "application/json",
 #     "APCA-API-KEY-ID": os.environ.get("ALPACA_API_KEY"),
 #     "APCA-API-SECRET-KEY": os.environ.get("ALPACA_SECRET_KEY")
 # }
-
 # response = requests.get(url, headers=headers)
-# stock_data = response.json().get("bars").get("MU")[0] # Get the first bar data for MU
-# current_price = stock_data.get("c")
-# print(current_price, "on", stock_data.get("t"))
+
+# try: 
+#     stock_data = response.json().get("bars").get("AAPL")[0] # Get the first bar data for AAPL
+#     print(stock_data.get("c"), "on", stock_data.get("t"))
+# except:
+#     print("No stock data available for AAPL on", query_date, "at given time")
 
 # FINNHUB - QUOTE
 # finnhub_client = finnhub.Client(api_key="...")
