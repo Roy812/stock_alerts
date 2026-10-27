@@ -7,8 +7,8 @@ import requests
 import websocket
 
 # requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-if not (requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))):
-    requests.post("https://ntfy.sh/stock_alerts", data="Started notification workflow on: ?")
+
+requests.post("", data="Test: " + os.environ.get("TEST_SECRET"))
 
 # ALPACA - HISTORICAL BARS (GMT)
 # query_date = (datetime.now() - timedelta(days=1)).date().strftime("%Y-%m-%d")
