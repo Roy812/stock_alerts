@@ -37,7 +37,7 @@ else:
         print(stock_data.get("c"), "on", stock_data.get("t"))
         requests.post("https://ntfy.sh/stock_alerts", data= "AAPL: " + str(stock_data.get("c")) + " on " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     else:
-        print("No stock data available for MU on", query_date, "at the requested time")
+        print("No stock data available for AAPL on", query_date, "at the requested time")
 
 # FINNHUB - QUOTE
 # finnhub_client = finnhub.Client(api_key="...")

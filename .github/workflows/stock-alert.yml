@@ -26,7 +26,7 @@ jobs:
             - name: Run stock alert script
               env:
                 TEST_SECRET: ${{ secrets.TEST_SECRET }}
-                # ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
-                # ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+                ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+                ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
               run: |
                 python ntfy/ntfy.py
