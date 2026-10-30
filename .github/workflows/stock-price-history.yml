@@ -20,7 +20,7 @@ jobs:
             - name: Install dependencies
               run: |
                 python -m pip install --upgrade pip
-                python -m pip install requests supabase
+                python -m pip install requests supabase psycopg2-binary
 
             - name: Run stock price history script
               env:
