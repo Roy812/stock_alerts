@@ -5,7 +5,7 @@ from repository import stock_repository
 from supabase import create_client, Client
 import requests
 
-requests.post("https://ntfy.sh/stock_alerts", data="Started stock price history wf on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+# requests.post("https://ntfy.sh/stock_alerts", data="Started stock price history wf on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 # try:
 #     data = stock_repository.get_all_stocks()
