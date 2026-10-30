@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 7 * * 1-5' # Monday through Friday at 7:00 AM UTC
-    - cron: '0 17 * * 1-5' # Monday through Friday at 17:00 AM UTC
+    # - cron: '0 17 * * 1-5' # Monday through Friday at 17:00 AM UTC
 
 jobs:
     run-stock-alert:
@@ -25,7 +25,6 @@ jobs:
 
             - name: Run stock alert script
               env:
-                TEST_SECRET: ${{ secrets.TEST_SECRET }}
                 ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
                 ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
               run: |
