@@ -28,4 +28,4 @@ jobs:
                 SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
                 ALPHA_VANTAGE_API: ${{ secrets.ALPHA_VANTAGE_API }}
               run: |
-                python -m automation/stock_price_history
+                python -m automation.stock_price_history
