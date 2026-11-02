@@ -47,7 +47,7 @@ try:
             "category": category
         }])
 
-    requests.post("https://ntfy.sh/stock_alerts", data="Stocks added successfully: " + tickers)
+    requests.post("https://ntfy.sh/stock_alerts", data="Stocks added successfully")
 except Exception as error:
-    requests.post("https://ntfy.sh/stock_alerts", data="Failed to add stocks: " + str(error))
-    raise RuntimeError("Failed to add stock") from error
+    requests.post("https://ntfy.sh/stock_alerts", data="Failed to add stocks")
+    raise RuntimeError("Failed to add stocks") from error
