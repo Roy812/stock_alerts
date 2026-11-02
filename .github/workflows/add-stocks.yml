@@ -28,4 +28,4 @@ jobs:
                 ADD_STOCKS_SECRET: ${{ secrets.ADD_STOCKS_SECRET }}
                 CATEGORY_SECRET: ${{ secrets.CATEGORY_SECRET }}
               run: |
-                python python -m automation.add_stocks
+                python -m automation.add_stocks
