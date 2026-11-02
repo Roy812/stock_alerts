@@ -8,7 +8,7 @@ import requests
 
 from repository import stock_repository
 
-# requests.post("https://ntfy.sh/stock_alerts", data="Started add stocks wf on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+requests.post("https://ntfy.sh/stock_alerts", data="Started add stocks wf on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
 try:
     # TICKER
@@ -46,5 +46,8 @@ try:
             "price": price,
             "category": category
         }])
+
+    requests.post("https://ntfy.sh/stock_alerts", data="Stocks added successfully: " + tickers)
 except Exception as error:
+    requests.post("https://ntfy.sh/stock_alerts", data="Failed to add stocks: " + str(error))
     raise RuntimeError("Failed to add stock") from error
