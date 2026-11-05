@@ -11,7 +11,7 @@ class Stock(TypedDict):
     category: str
     price: float
 
-# def create_supabase_db():
+def create_supabase_db():
 # if main := __name__ == "__main__":
     # Connecting to PostgreSQL database
     try:
