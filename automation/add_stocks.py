@@ -6,6 +6,7 @@ from supabase import create_client, Client
 import finnhub
 import requests
 
+import constants
 from repository import stock_repository
 
 requests.post("https://ntfy.sh/stock_alerts", data="Started add stocks wf on: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -38,13 +39,19 @@ try:
         quote_data = finnhub_client.quote(ticker)
         price = float(quote_data.get("c"))
 
+        # SECTOR
+        sector = "Unknown"
+        if (constants.AI_TECH.__contains__(category)):
+            sector = "AI_TECH"
+
         # ADD STOCK
         print("New Stock:", ticker, company_name, category, price)
         stock_repository.add_stocks([{
             "ticker": ticker,
             "company_name": company_name,
             "price": price,
-            "category": category
+            "category": category,
+            "sector": sector
         }])
 
     requests.post("https://ntfy.sh/stock_alerts", data="Stocks added successfully")

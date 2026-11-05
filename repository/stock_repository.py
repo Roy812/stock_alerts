@@ -11,7 +11,8 @@ class Stock(TypedDict):
     category: str
     price: float
 
-def create_supabase_db():
+# def create_supabase_db():
+# if main := __name__ == "__main__":
     # Connecting to PostgreSQL database
     try:
         connection_string = os.environ.get("sb_connection_string_shared")
@@ -35,7 +36,8 @@ def create_supabase_db():
         cursor.execute("CREATE TABLE IF NOT EXISTS stock_price_history (" \
                                     "stock_price_history_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, " \
                                     "ticker TEXT NOT NULL REFERENCES stock(ticker), " \
-                                    "price NUMERIC(10, 2), " \
+                                    "price NUMERIC(10, 2), " 
+                                    "volume INT, " \
                                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " \
                                     "price_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP" \
                                 ");"
@@ -57,13 +59,14 @@ def create_supabase_client():
     print("Supabase client created successfully!")
     return sb_client 
 
-def add_stock_price_history(ticker: str, price: float):
-    if not ticker or not price:
+def add_stock_price_history(ticker: str, price: float, volume: int):
+    if not ticker or not price or not volume:
         raise ValueError("Incomplete data")
        
     data = {
         "ticker": ticker,
-        "price": price
+        "price": price,
+        "volume": volume
     }
     try:
         response = create_supabase_client().table("stock_price_history").insert(data).execute()
@@ -102,28 +105,29 @@ def update_stock_price_history(stock_price_history_id: int, price: float):
     except:
         print("Unable to update stock price history from id:", stock_price_history_id)
 
-def delete_stock_price_history(stock_price_history_id: int):
-    if stock_price_history_id <= 0:
-        raise ValueError("A valid stock price history ID is required")
+def delete_stock_price_history(ticker: str):
+    if not ticker:
+        raise ValueError("A ticker is required")
 
     try:
         response = (
                 create_supabase_client()
                 .table("stock_price_history")
                 .delete()
-                .eq("stock_price_history_id", stock_price_history_id)
+                .eq("ticker", ticker)
                 .execute()
             )
-        print("Deleted stock price history from id:", stock_price_history_id)
+        print("Deleted stock price history for ticker:", ticker)
         return response.data
     except:
-        print("Unable to delete stock price history from id:", stock_price_history_id)
+        print("Unable to delete stock price history for ticker:", ticker)
 
 
 def add_stocks(stocks: Sequence[Stock]):
     if not stocks:
         raise ValueError("At least one stock is required")
-
+    
+    print("Adding stocks:", stocks)
     now = datetime.now().isoformat()
     data = [
         {
