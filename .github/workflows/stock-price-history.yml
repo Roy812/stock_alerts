@@ -3,7 +3,7 @@ name: Stock Price History
 on:
     workflow_dispatch:
     schedule:
-        - cron: '0 16 * * 1-5' # Monday through Friday at 17:00 AM UTC
+        - cron: '0 16 * * 1-5' # Monday through Friday at 16:00 AM UTC
 
 jobs:
     run-stock-alert:
@@ -20,12 +20,13 @@ jobs:
             - name: Install dependencies
               run: |
                 python -m pip install --upgrade pip
-                python -m pip install requests supabase psycopg2-binary
+                python -m pip install requests supabase psycopg2-binary finnhub-python
 
             - name: Run stock price history script
               env:
                 SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
                 SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-                ALPHA_VANTAGE_API: ${{ secrets.ALPHA_VANTAGE_API }}
+                FINNHUB_API: ${{ secrets.FINNHUB_API }}
+                TIINGO_API_KEY: ${{ secrets.TIINGO_API_KEY }}
               run: |
                 python -m automation.stock_price_history
