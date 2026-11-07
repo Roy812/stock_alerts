@@ -49,8 +49,8 @@ def create_supabase_db():
                                             "date TEXT, " 
                                             "revenue_estimated INT, " \
                                             "revenue_actual INT, " \
-                                            "eps_estimated INT, " \
-                                            "eps_actual INT, " \
+                                            "eps_estimated NUMERIC(10, 2), " \
+                                            "eps_actual NUMERIC(10, 2), " \
                                             "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP " \
                                         ");"
                                         )
