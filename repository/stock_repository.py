@@ -43,6 +43,18 @@ def create_supabase_db():
                                 ");"
                                 )
 
+        cursor.execute("CREATE TABLE IF NOT EXISTS stock_earnings (" \
+                                            "stock_earnings_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, " \
+                                            "ticker TEXT NOT NULL REFERENCES stock(ticker), " \
+                                            "date TEXT, " 
+                                            "revenue_estimated INT, " \
+                                            "revenue_actual INT, " \
+                                            "eps_estimated INT, " \
+                                            "eps_actual INT, " \
+                                            "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP " \
+                                        ");"
+                                        )
+
         conn.commit()
         print("Table(s) created successfully if not exists!")
 
