@@ -47,8 +47,8 @@ def create_supabase_db():
                                             "stock_earnings_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, " \
                                             "ticker TEXT NOT NULL REFERENCES stock(ticker), " \
                                             "date TEXT, " 
-                                            "revenue_estimated INT, " \
-                                            "revenue_actual INT, " \
+                                            "revenue_estimated BIGINT, " \
+                                            "revenue_actual BIGINT, " \
                                             "eps_estimated NUMERIC(10, 2), " \
                                             "eps_actual NUMERIC(10, 2), " \
                                             "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP " \
