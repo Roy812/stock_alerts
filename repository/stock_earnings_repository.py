@@ -41,20 +41,23 @@ def add_stock_earnings(
         "eps_actual": eps_actual,
     }
     response = create_supabase_client().table("stock_earnings").insert(data).execute()
+    print("Inserted stock earnings:", data)
     return response.data
 
 
-def get_stock_earnings(ticker: str):
+def get_stock_earnings(ticker: str, date: str | None = None):
     if not ticker:
         return []
 
-    response = (
+    query = (
         create_supabase_client()
         .table("stock_earnings")
         .select("*")
         .eq("ticker", ticker)
-        .execute()
     )
+    if date is not None:
+        query = query.eq("date", date)
+    response = query.execute()
     return response.data
 
 
@@ -86,6 +89,7 @@ def update_stock_earnings(
         .eq("stock_earnings_id", stock_earnings_id)
         .execute()
     )
+    print("Updated stock earnings:", updates)
     return response.data
 
 
@@ -100,4 +104,5 @@ def delete_stock_earnings(stock_earnings_id: int):
         .eq("stock_earnings_id", stock_earnings_id)
         .execute()
     )
+    print("Deleted stock earnings with ID:", stock_earnings_id)
     return response.data
