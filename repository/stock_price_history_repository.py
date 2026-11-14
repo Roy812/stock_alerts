@@ -1,3 +1,4 @@
+from datetime import date
 import os
 from supabase import create_client, Client
 
@@ -17,7 +18,8 @@ def add_stock_price_history(ticker: str, price: float, volume: int):
     data = {
         "ticker": ticker,
         "price": price,
-        "volume": volume
+        "volume": volume,
+        "date": date.today().strftime("%Y-%m-%d")
     }
     try:
         response = create_supabase_client().table("stock_price_history").insert(data).execute()
