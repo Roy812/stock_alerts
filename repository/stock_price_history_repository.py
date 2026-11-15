@@ -1,6 +1,8 @@
-from datetime import date, timedelta
+from datetime import datetime, timedelta
 import os
 from supabase import create_client, Client
+
+from utils.date_utils import format_timestamp_as_date
 
 
 def create_supabase_client():
@@ -19,7 +21,6 @@ def add_stock_price_history(ticker: str, price: float, volume: int):
         "ticker": ticker,
         "price": price,
         "volume": volume,
-        "date": date.today().strftime("%Y-%m-%d")
     }
     try:
         response = create_supabase_client().table("stock_price_history").insert(data).execute()
@@ -83,13 +84,18 @@ def delete_stock_price_history_from_30_days_ago(ticker: str):
     if not ticker:
         raise ValueError("A ticker is required")
 
-    target_date = (date.today() - timedelta(days=30)).isoformat()
+    target_timestamp = datetime.now() - timedelta(days=30)
+    target_date = format_timestamp_as_date(target_timestamp)
+    following_date = format_timestamp_as_date(
+        target_timestamp + timedelta(days=1)
+    )
     response = (
         create_supabase_client()
         .table("stock_price_history")
         .delete()
         .eq("ticker", ticker)
-        .eq("date", target_date)
+        .gte("created_at", target_date)
+        .lt("created_at", following_date)
         .execute()
     )
     return response.data
