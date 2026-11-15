@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 import os
 from supabase import create_client, Client
 
@@ -77,3 +77,19 @@ def delete_stock_price_history(ticker: str):
         return response.data
     except:
         print("Unable to delete stock price history for ticker:", ticker)
+
+
+def delete_stock_price_history_from_30_days_ago(ticker: str):
+    if not ticker:
+        raise ValueError("A ticker is required")
+
+    target_date = (date.today() - timedelta(days=30)).isoformat()
+    response = (
+        create_supabase_client()
+        .table("stock_price_history")
+        .delete()
+        .eq("ticker", ticker)
+        .eq("date", target_date)
+        .execute()
+    )
+    return response.data

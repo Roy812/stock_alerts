@@ -40,6 +40,8 @@ try:
         stock_price_history_repository.add_stock_price_history(ticker, close_price, volume)
         print(f"Added price history for {ticker}: price: {close_price} volume: {volume}")
 
+        stock_price_history_repository.delete_stock_price_history_from_30_days_ago(ticker)
+
     requests.post("https://ntfy.sh/stock_alerts", data="Stock price history updated successfully")
 except Exception as error:
     requests.post("https://ntfy.sh/stock_alerts", data="Failed to update stock price history")
