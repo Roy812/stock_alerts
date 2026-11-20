@@ -2,8 +2,8 @@ name: Stock Price History
 
 on:
     workflow_dispatch:
-    schedule:
-        - cron: '0 16 * * 1-5' # Monday through Friday at 16:00 AM UTC
+    # schedule:
+        # - cron: '0 16 * * 1-5' # Monday through Friday at 16:00 AM UTC
 
 jobs:
     run-stock-alert:
